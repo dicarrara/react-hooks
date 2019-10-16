@@ -4,7 +4,9 @@ import Card from "../UI/Card";
 import "./IngredientForm.css";
 
 const IngredientForm = React.memo(props => {
-  const inputState = useState({ name: "", amount: "" });
+  // use array destructuring, where inputState - our data and setInputState - our function to set new data.
+  const [inputState, setInputState] = useState({ name: "", amount: "" });
+  
   const submitHandler = event => {
     event.preventDefault();
     // ...
@@ -19,10 +21,10 @@ const IngredientForm = React.memo(props => {
             <input
               type="text"
               id="title"
-              value={inputState[0].name}
+              value={inputState.name}
               onChange={event => {
                 const newName = event.target.value
-                inputState[1](prevInputState => ({
+                setInputState(prevInputState => ({
                   name: newName,
                   amount: prevInputState.amount
                 }))}
@@ -34,10 +36,10 @@ const IngredientForm = React.memo(props => {
             <input
               type="number"
               id="amount"
-              value={inputState[0].amount}
+              value={inputState.amount}
               onChange={event => {
                 const newAmount = event.target.value
-                inputState[1](prevInputState => ({
+                setInputState(prevInputState => ({
                   name: prevInputState.name,
                   amount: newAmount
                 }))}
