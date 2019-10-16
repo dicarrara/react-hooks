@@ -5,10 +5,14 @@ import "./IngredientForm.css";
 
 const IngredientForm = React.memo(props => {
   // use array destructuring, where inputState - our data and setInputState - our function to set new data.
-  const [inputState, setInputState] = useState({ name: "", amount: "" });
+  // const [inputState, setInputState] = useState({ name: "", amount: "" });
+  // or manage multi state
+  const [enterName, setEnterName] = useState('');
+  const [enterAmount, setEnterAmount] = useState('');
   
   const submitHandler = event => {
     event.preventDefault();
+    props.onAddIngredient({name: enterName, amount: enterAmount});
     // ...
   };
 
@@ -21,14 +25,10 @@ const IngredientForm = React.memo(props => {
             <input
               type="text"
               id="title"
-              value={inputState.name}
+              value={enterName}
               onChange={event => {
-                const newName = event.target.value
-                setInputState(prevInputState => ({
-                  name: newName,
-                  amount: prevInputState.amount
-                }))}
-              }
+                setEnterName(event.target.value)
+              }}
             />
           </div>
           <div className="form-control">
@@ -36,14 +36,10 @@ const IngredientForm = React.memo(props => {
             <input
               type="number"
               id="amount"
-              value={inputState.amount}
+              value={enterAmount}
               onChange={event => {
-                const newAmount = event.target.value
-                setInputState(prevInputState => ({
-                  name: prevInputState.name,
-                  amount: newAmount
-                }))}
-              }
+              setEnterAmount(event.target.value)
+              }}
             />
           </div>
           <div className="ingredient-form__actions">
