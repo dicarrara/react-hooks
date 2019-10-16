@@ -13,6 +13,15 @@ const Ingredients = () => {
       ]);
 
   }
+
+  // define function to delete ingredients, pass id as a argument, so we not what to remove
+  const deleteIngredientsHandler = ingredientId => {
+    // to update ingredients we will call for setUserIngr function,
+    // the goal will be to get updated array without clicked element
+    setUserIngredient(prevIngredients => prevIngredients.filter((ingredient) => ingredient.id !== ingredientId))
+
+  }
+
   return (
     <div className="App">
       {/* passing addIngredient to ingredient form component */}
@@ -20,7 +29,7 @@ const Ingredients = () => {
 
       <section>
         <Search />
-        <IngredientList ingredients = {userIngredient} onRemoveItem={() => {}}/>
+        <IngredientList ingredients = {userIngredient} onRemoveItem={deleteIngredientsHandler}/>
         {/* Need to add list here! */}
       </section>
     </div>
